@@ -21,9 +21,11 @@ export default StyleSheet.create({
   title: {
     fontSize: 20,
     textAlign: 'center',
-    marginBottom: 10
+    marginBottom: 10,
+    color: 'black'
   },
   year: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'black'
   }
 });

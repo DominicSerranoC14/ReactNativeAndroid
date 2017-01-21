@@ -1,3 +1,5 @@
+'use strict';
+
 const MOVIE_LIST = [
   { title: 'Fight Club', year: '2000', poster: { thumbnail: 'https://s-media-cache-ak0.pinimg.com/736x/fd/5e/66/fd5e662dce1a3a8cd192a5952fa64f02.jpg' }}
 ];
@@ -10,6 +12,7 @@ import {
   Image
 } from 'react-native';
 import styles from './styles/android.js'
+
 
 export default class ReactNativeAndroid extends Component {
   render() {
