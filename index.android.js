@@ -5,37 +5,28 @@ const MOVIE_LIST = [
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
   Text,
   View,
   Image
 } from 'react-native';
+import styles from './styles/android.js'
 
 export default class ReactNativeAndroid extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>{MOVIE_LIST[0].title}</Text>
-        <Text>{MOVIE_LIST[0].year}</Text>
         <Image source={{ uri: MOVIE_LIST[0].poster.thumbnail}}
-          style={styles.thumbnail}
+        style={styles.thumbnail}
         />
+
+      <View style={styles.rightContainer}>
+        <Text style={styles.title}>{MOVIE_LIST[0].title}</Text>
+        <Text style={styles.year}>{MOVIE_LIST[0].year}</Text>
+      </View>
+
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  thumbnail: {
-    width: 100,
-    height:200,
-  },
-});
 
 AppRegistry.registerComponent('ReactNativeAndroid', () => ReactNativeAndroid);
