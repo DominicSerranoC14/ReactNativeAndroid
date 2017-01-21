@@ -27,5 +27,9 @@ export default StyleSheet.create({
   year: {
     textAlign: 'center',
     color: 'black'
-  }
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
+  },
 });
