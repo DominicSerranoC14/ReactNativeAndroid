@@ -10,10 +10,6 @@ import {
 } from 'react-native';
 import styles from './styles/android.js'
 
-const MOVIE_LIST = [
-  { title: 'Fight Club', year: '2000', poster: { thumbnail: 'https://s-media-cache-ak0.pinimg.com/736x/fd/5e/66/fd5e662dce1a3a8cd192a5952fa64f02.jpg' }}
-];
-
 export default class ReactNativeAndroid extends Component {
 
   constructor(props) {
@@ -31,16 +27,17 @@ export default class ReactNativeAndroid extends Component {
   };
 
   fetchData() {
-    fetch('https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json')
-    .then((response) => response.json())
-    .then((responseData) => {
-      console.log("responseData", responseData);
+    fetch('http://www.omdbapi.com/?s=Batman')
+    .then(response => response.json())
+    .then(jsonObj => jsonObj.Search)
+    .then(movieArray => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(responseData.movies.slice(0, 10)),
+        dataSource: this.state.dataSource.cloneWithRows(movieArray),
         loaded: true
       });
     })
-    .done();
+    .catch(console.error);
+
   };
 
   render() {
@@ -71,12 +68,12 @@ export default class ReactNativeAndroid extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: movie.posters.thumbnail}}
+          source={{uri: movie.Poster}}
           style={styles.thumbnail}
         />
         <View style={styles.rightContainer}>
-          <Text style={styles.title}>{movie.title}</Text>
-          <Text style={styles.year}>{movie.year}</Text>
+          <Text style={styles.title}>{movie.Title}</Text>
+          <Text style={styles.year}>{movie.Year}</Text>
         </View>
       </View>
     );
