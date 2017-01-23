@@ -5,10 +5,12 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'lightgray',
+    padding: 5
   },
   thumbnail: {
     width: 100,
@@ -26,6 +28,10 @@ export default StyleSheet.create({
   },
   year: {
     textAlign: 'center',
-    color: 'black'
-  }
+    color: 'grey'
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
+  },
 });
