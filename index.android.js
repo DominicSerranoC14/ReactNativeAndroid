@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, Image, ScrollView } from 'react-native';
+import styles from './styles/androidStyles.js';
 
 export default class ReactNativeAndroid extends Component {
 
@@ -22,6 +23,7 @@ export default class ReactNativeAndroid extends Component {
     fetch(`http://www.omdbapi.com/?s=${this.state.value}`)
     .then(response => response.json())
     .then(jsonObj => jsonObj.Search)
+    .then(unsortedArray => unsortedArray.sort((a, b) => b.Year - a.Year))
     .then(movieArray => this.setState({
       movieSearch: movieArray,
       movieState: true
@@ -33,14 +35,14 @@ export default class ReactNativeAndroid extends Component {
 
     if (this.state.movieState) {
       return (
-        <ScrollView >
-          <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginTop: 10}}>
+        <ScrollView style={styles.searchContainer}>
+          <View style={styles.searchHeaderView}>
             <Button
               onPress={() => this.setState({movieState: false, value: ''})}
               title="Back"
               color="red"
             />
-            <Text style={{fontSize: 30, fontFamily: 'Times New Roman', textAlign: 'center', marginLeft: 40}}>Search Results</Text>
+            <Text style={styles.searchHeaderTitle}>Search Results</Text>
           </View>
 
 
@@ -52,12 +54,12 @@ export default class ReactNativeAndroid extends Component {
 
             return (
 
-              <View key={i} style={{flexDirection: 'row', backgroundColor: 'lightgrey', alignItems: 'center', padding: 10, marginTop: 10}}>
+              <View key={i} style={styles.movieContainer}>
 
-                <Image style={{width: 150, height: 175}} source={{uri: each.Poster}} />
-                <View style={{flex: 1}}>
-                  <Text style={{fontSize: 25, textAlign: 'center', fontFamily: 'Times New Roman', color: 'white'}} >{each.Title}</Text>
-                  <Text style={{fontSize: 15, textAlign: 'center', fontFamily: 'Times New Roman', color: 'white'}} >{each.Year}</Text>
+                <Image style={styles.movieImage} source={{uri: each.Poster}} />
+                <View style={styles.movieTextView}>
+                  <Text style={styles.movieTitleText} >{each.Title}</Text>
+                  <Text style={styles.movieYearText} >{each.Year}</Text>
                 </View>
 
               </View>
@@ -68,18 +70,19 @@ export default class ReactNativeAndroid extends Component {
     };
 
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={styles.formContainer}>
 
-        <Text style={{fontSize: 30, fontFamily: 'Times New Roman'}}>Movie Finder</Text>
+        <Text style={styles.formTitle}>Movie Finder</Text>
+        <Text style={styles.formDesc}>Search for your favorite movie here to see similar titles and more!</Text>
         <TextInput
-          style={{height: 40, width: 200, margin: 20}}
-          placeholder="Type here"
+          style={styles.formInput}
+          placeholder="Search by Movie Title"
           value={this.state.value}
           onChangeText={text => this.setState({value: text})}
           onSubmitEditing={this.searchForMovieTitle}
         />
 
-        <View style={{width: 200}}>
+        <View style={styles.formButton}>
           <Button
             onPress={this.searchForMovieTitle}
             title="Search"
